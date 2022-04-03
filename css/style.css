@@ -1,0 +1,28 @@
+.header{
+    width: 100%;
+    height: 200px;
+    margin: 0px;
+    padding: 0px;
+    background-size: cover;
+    z-index: -1;
+}
+.mt-content{
+    margin-top: 125px;
+}
+.padding-right{
+    padding-right: 30px;
+}
+.border-dashed-right{
+    border-right:1px dashed #D6D6D6;
+}
+.size-total-price{
+    height: 146px;
+}
+#myChart{
+    /*height: 449px !important;*/
+    object-fit: cover;
+}
+.radio-button-sizing{
+    border: 1px solid #D6D6D6;
+    padding: 15px 50px 15px 15px;
+}
