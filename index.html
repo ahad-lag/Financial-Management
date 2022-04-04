@@ -23,16 +23,16 @@
                             <div class="d-flex justify-content-between">
                                 <div class="col-md-6 pe-2">
                                     <div class="form-check fs-5 radio-button-sizing">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
+                                        <input class="form-check-input" type="radio" name="radio-button" id="radio-button-income">
+                                        <label class="form-check-label" for="radio-button-income">
                                             درآمد
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-md-6 ps-2">
                                     <div class="form-check fs-5 radio-button-sizing">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                                        <label class="form-check-label" for="flexRadioDefault2">
+                                        <input class="form-check-input" type="radio" name="radio-button" id="radio-button-cost" checked>
+                                        <label class="form-check-label" for="radio-button-cost">
                                             هزینه
                                         </label>
                                     </div>
@@ -41,9 +41,9 @@
                         </div>
                         <div class="mb-3">
                             <label for="price" class="form-label fw-bold">مبلغ :</label>
-                            <input type="number" class="form-control" id="price">
+                            <input type="number" class="form-control" id="price" onchange="document.getElementById('char').innerHTML = Num2persian(this.value)">
                             <div class="text-muted">
-                                <span class="text-success fw-bold">دویست هزار</span> تومان
+                                <span id="char" class="text-success fw-bold">صفر</span> تومان
                             </div>
                         </div>
                         <div class="mb-3">
@@ -150,6 +150,7 @@
     <script src="js/jquery.dataTables.min.js"></script>
     <script src="js/dataTables.bootstrap5.min.js"></script>
     <script src="js/chart.min.js"></script>
+    <script src="js/num2persian.js" type="text/javascript"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
