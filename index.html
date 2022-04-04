@@ -23,7 +23,7 @@
                             <div class="d-flex justify-content-between">
                                 <div class="col-md-6 pe-2">
                                     <div class="form-check fs-5 radio-button-sizing">
-                                        <input class="form-check-input" type="radio" name="radio-button" id="radio-button-income">
+                                        <input class="form-check-input" type="radio" name="radio-button" id="radio-button-income" onclick="document.getElementById('char').classList.add('text-success'); document.getElementById('char').classList.remove('text-danger');">
                                         <label class="form-check-label" for="radio-button-income">
                                             درآمد
                                         </label>
@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="col-md-6 ps-2">
                                     <div class="form-check fs-5 radio-button-sizing">
-                                        <input class="form-check-input" type="radio" name="radio-button" id="radio-button-cost" checked>
+                                        <input class="form-check-input" type="radio" name="radio-button" id="radio-button-cost" onclick="document.getElementById('char').classList.add('text-danger'); document.getElementById('char').classList.remove('text-success');" checked>
                                         <label class="form-check-label" for="radio-button-cost">
                                             هزینه
                                         </label>
@@ -43,7 +43,7 @@
                             <label for="price" class="form-label fw-bold">مبلغ :</label>
                             <input type="number" class="form-control" id="price" onchange="document.getElementById('char').innerHTML = Num2persian(this.value)">
                             <div class="text-muted">
-                                <span id="char" class="text-success fw-bold">صفر</span> تومان
+                                <span id="char" class="text-danger fw-bold">صفر</span> تومان
                             </div>
                         </div>
                         <div class="mb-3">

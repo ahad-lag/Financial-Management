@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="35288053-e451-4a49-bffa-851394be3844" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/js/num2persian.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
@@ -90,6 +89,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/js" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -110,7 +110,7 @@
       <option name="presentableId" value="Default" />
       <updated>1649008329994</updated>
       <workItem from="1649008333058" duration="13831000" />
-      <workItem from="1649075783587" duration="645000" />
+      <workItem from="1649075783587" duration="1694000" />
     </task>
     <servers />
   </component>
