@@ -36,10 +36,10 @@
              // for data entry table from localStorage
              let tr_subject = document.createElement('tr');
              let td_row = document.createElement('td');
-             td_row.textContent = i + 1;
+             td_row.textContent = this.numberToPersian(i + 1);
              tr_subject.appendChild(td_row);
              let td_price = document.createElement('td');
-             td_price.textContent = items[i].price;
+             td_price.textContent = this.numberToPersian(this.separate(items[i].price));
              tr_subject.appendChild(td_price);
              let td_date = document.createElement('td');
              let date = items[i]['date'].year + '/' + items[i]['date'].month + '/' + items[i]['date'].day;
@@ -47,6 +47,11 @@
              tr_subject.appendChild(td_date);
              let td_type = document.createElement('td');
              td_type.textContent = items[i].type;
+             if(items[i].type == 'هزینه') {
+                 td_type.setAttribute('class', 'text-danger');
+             }else if(items[i].type == 'درآمد'){
+                 td_type.setAttribute('class', 'text-success');
+             }
              tr_subject.appendChild(td_type);
              let td_desc = document.createElement('td');
              td_desc.textContent = items[i].desc;
