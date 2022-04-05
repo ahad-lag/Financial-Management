@@ -1,4 +1,27 @@
  class Main {
+     numberToPersian(number){
+         const persian = { 0: "۰", 1: "۱", 2: "۲", 3: "۳", 4: "۴", 5: "۵", 6: "۶", 7: "۷", 8: "۸", 9: "۹", ',': "," , '/': "/"};
+         number = number.toString().split("");
+         let persianNumber = "";
+         for (let i = 0; i < number.length; i++) {
+             number[i] = persian[number[i]];
+         }
+         for (let i = 0; i < number.length; i++) {
+             persianNumber += number[i];
+         }
+         return persianNumber;
+     }
+     separate(Number) {
+         Number+= '';
+         Number= Number.replace(',', '');
+         let x = Number.split('.');
+         let y = x[0];
+         let z= x.length > 1 ? '.' + x[1] : '';
+         var rgx = /(\d+)(\d{3})/;
+         while (rgx.test(y))
+             y= y.replace(rgx, '$1' + ',' + '$2');
+         return y + z;
+     }
      loadPage() {
          let income = 0;
          let cost = 0;
@@ -20,7 +43,7 @@
              tr_subject.appendChild(td_price);
              let td_date = document.createElement('td');
              let date = items[i]['date'].year + '/' + items[i]['date'].month + '/' + items[i]['date'].day;
-             td_date.textContent = date;
+             td_date.textContent = this.numberToPersian(date);
              tr_subject.appendChild(td_date);
              let td_type = document.createElement('td');
              td_type.textContent = items[i].type;
@@ -31,7 +54,7 @@
              document.getElementById('table-body').appendChild(tr_subject);
          }
          // for data entry in total box
-         document.getElementById('total-cost').textContent = cost;
-         document.getElementById('total-income').textContent = income;
+         document.getElementById('total-cost').textContent = this.numberToPersian(this.separate(cost));
+         document.getElementById('total-income').textContent = this.numberToPersian(this.separate(income));
      }
  }
