@@ -37,3 +37,6 @@ const myChart = new Chart(ctx, {
         }
     }
 });
+
+let main = new Main();
+main.loadPage();
