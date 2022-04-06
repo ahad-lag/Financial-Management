@@ -19,48 +19,50 @@
             <div class="col-md-6">
                 <div class="card h-100 px-4 pt-3">
                     <div class="card-body">
-                        <div class="mb-3">
-                            <div class="d-flex justify-content-between">
-                                <div class="col-md-6 pe-2">
-                                    <div class="form-check fs-5 radio-button-sizing">
-                                        <input class="form-check-input" type="radio" name="radio-button" id="radio-button-income" onclick="document.getElementById('char').classList.add('text-success'); document.getElementById('char').classList.remove('text-danger');">
-                                        <label class="form-check-label" for="radio-button-income">
-                                            درآمد
-                                        </label>
+                        <form id="form" method="post">
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <div class="col-md-6 pe-2">
+                                        <div class="form-check fs-5 radio-button-sizing">
+                                            <input class="form-check-input" type="radio" name="radio" id="radio-button-income" onclick="document.getElementById('char').classList.add('text-success'); document.getElementById('char').classList.remove('text-danger');">
+                                            <label class="form-check-label" for="radio-button-income">
+                                                درآمد
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 ps-2">
+                                        <div class="form-check fs-5 radio-button-sizing">
+                                            <input class="form-check-input" type="radio" name="radio" id="radio-button-cost" onclick="document.getElementById('char').classList.add('text-danger'); document.getElementById('char').classList.remove('text-success');" checked>
+                                            <label class="form-check-label" for="radio-button-cost">
+                                                هزینه
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 ps-2">
-                                    <div class="form-check fs-5 radio-button-sizing">
-                                        <input class="form-check-input" type="radio" name="radio-button" id="radio-button-cost" onclick="document.getElementById('char').classList.add('text-danger'); document.getElementById('char').classList.remove('text-success');" checked>
-                                        <label class="form-check-label" for="radio-button-cost">
-                                            هزینه
-                                        </label>
-                                    </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="price" class="form-label fw-bold">مبلغ :</label>
+                                <input type="number" class="form-control" id="price" name="price" onchange="document.getElementById('char').innerHTML = Num2persian(this.value)" required>
+                                <div class="text-muted">
+                                    <span id="char" class="text-danger fw-bold">صفر</span> تومان
                                 </div>
                             </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="price" class="form-label fw-bold">مبلغ :</label>
-                            <input type="number" class="form-control" id="price" onchange="document.getElementById('char').innerHTML = Num2persian(this.value)">
-                            <div class="text-muted">
-                                <span id="char" class="text-danger fw-bold">صفر</span> تومان
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label fw-bold">تاریخ :</label>
+                                <div class="d-flex justify-content-between">
+                                    <input type="number" name="day" class="form-control" placeholder="روز" required>
+                                    <input type="number" name="month" class="form-control mx-3" placeholder="ماه" required>
+                                    <input type="number" name="year" class="form-control" placeholder="سال" required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label fw-bold">تاریخ :</label>
-                            <div class="d-flex justify-content-between">
-                                <input type="number" class="form-control" placeholder="روز">
-                                <input type="number" class="form-control mx-3" placeholder="ماه">
-                                <input type="number" class="form-control" placeholder="سال">
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label fw-bold">توضیحات :</label>
+                                <textarea name="desc" class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
                             </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label fw-bold">توضیحات :</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
-                        </div>
-                        <div class="d-grid mb-3">
-                            <input type="submit" class="btn btn-lg btn-success" value="ثبت دخل و خرج">
-                        </div>
+                            <div class="d-grid mb-3">
+                                <input type="submit" class="btn btn-lg btn-success" value="ثبت دخل و خرج">
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -70,13 +72,13 @@
                         <div class="col-md-6 d-flex justify-content-center align-items-center">
                             <div class="text-center">
                                 <div class="">درآمد</div>
-                                <div id="total-income" class="text-success">۸۶۵,۰۰۰,۰۰۰</div>
+                                <div id="total-income" class="text-success">۰</div>
                             </div>
                         </div>
                         <div class="col-md-6 d-flex justify-content-center align-items-center border-dashed-right">
                             <div class="text-center">
                                 <div class="">مخارج</div>
-                                <div id="total-cost" class="text-danger">۵۵۰,۰۰۰,۰۰۰</div>
+                                <div id="total-cost" class="text-danger">۰</div>
                             </div>
                         </div>
                     </div>
