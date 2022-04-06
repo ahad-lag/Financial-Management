@@ -22,6 +22,86 @@
              y= y.replace(rgx, '$1' + ',' + '$2');
          return y + z;
      }
+     loadChart(){
+         let items = JSON.parse(localStorage.getItem('financialManagement'));
+         let date_income = {};
+         let date_cost = {};
+         for(let i=0;i<items.length;i++){
+             let total_cost = 0;
+             let total_income = 0;
+             for(let j=0;j<items.length;j++){
+                 if(items[i].date.year == items[j].date.year && items[i].date.month == items[j].date.month){
+                        if(items[j].type == 'درآمد'){
+                            total_income += Number(items[j].price);
+                        }else if(items[j].type == 'هزینه'){
+                            total_cost += Number(items[j].price);
+                        }
+                 }
+             }
+             date_income = Object.assign({},date_income,{
+                 [items[i].date.year+'/'+items[i].date.month] : total_income
+             })
+             date_cost = Object.assign({},date_cost,{
+                 [items[i].date.year+'/'+items[i].date.month] : total_cost
+             })
+         }
+
+         // console.log(month[items[i].date.month - 1]);
+         let key = Object.keys(date_cost);
+         for(let i=0;i<key.length;i++){
+
+             key[i] = key[i].replace("/12", " اسفند");
+             key[i] = key[i].replace("/11", " بهمن");
+             key[i] = key[i].replace("/10", " دی");
+             key[i] = key[i].replace("/9", " آذر");
+             key[i] = key[i].replace("/8", " آبان");
+             key[i] = key[i].replace("/7", " مهر");
+             key[i] = key[i].replace("/6", " شهریور");
+             key[i] = key[i].replace("/5", " مرداد");
+             key[i] = key[i].replace("/4", " تیر");
+             key[i] = key[i].replace("/3", " خرداد");
+             key[i] = key[i].replace("/2", " اردیبهشت");
+             key[i] = key[i].replace("/1", " فروردین");
+         }
+         let val_cost = Object.values(date_cost);
+         let val_income = Object.values(date_income);
+
+         const ctx = document.getElementById('myChart').getContext('2d');
+         const myChart = new Chart(ctx, {
+             type: 'line',
+             data: {
+                 labels: key,
+                 datasets: [{
+                     label: 'درآمد',
+                     data: val_income,
+                     backgroundColor: [
+                         '#2CBE26'
+                     ],
+                     borderColor: [
+                         '#2CBE26'
+                     ],
+                     borderWidth: 2
+                 },{
+                     label: 'هزینه',
+                     data: val_cost,
+                     backgroundColor: [
+                         '#E03F3F'
+                     ],
+                     borderColor: [
+                         '#E03F3F'
+                     ],
+                     borderWidth: 2
+                 }]
+             },
+             options: {
+                 scales: {
+                     y: {
+                         beginAtZero: true
+                     }
+                 }
+             }
+         });
+     }
      loadPage() {
          let income = 0;
          let cost = 0;
@@ -84,6 +164,7 @@
              document.getElementById('total-cost').textContent = this.numberToPersian(this.separate(cost));
              document.getElementById('total-income').textContent = this.numberToPersian(this.separate(income));
          }
+         this.loadChart();
      }
      addItem(price,type,year,month,day,desc) {
          if(localStorage.getItem('financialManagement') !== null){
