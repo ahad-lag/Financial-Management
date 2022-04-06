@@ -59,7 +59,20 @@
                  }
                  tr_subject.appendChild(td_type);
                  let td_desc = document.createElement('td');
-                 td_desc.textContent = items[i].desc;
+                 let a_desc = document.createElement('a');
+                 a_desc.textContent = 'نمایش';
+                 a_desc.setAttribute('class', 'btn btn-primary btn-sm me-2 px-2');
+                 a_desc.setAttribute('data-bs-toggle', 'modal');
+                 a_desc.setAttribute('data-bs-target', '#descModal');
+                 a_desc.setAttribute('onclick', 'document.getElementById("desc_text").textContent = "'+ items[i].desc +'";');
+                 let a_delete = document.createElement('a');
+                 a_delete.textContent = 'حذف';
+                 a_delete.setAttribute('class', 'btn btn-outline-danger btn-sm px-2');
+                 a_delete.setAttribute('data-bs-toggle', 'modal');
+                 a_delete.setAttribute('data-bs-target', '#deleteModal');
+                 td_desc.appendChild(a_desc);
+                 td_desc.appendChild(a_delete);
+
                  tr_subject.appendChild(td_desc);
                  document.getElementById('dataTable').appendChild(table_body);
              }
