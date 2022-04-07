@@ -24,88 +24,71 @@
      }
      loadChart(){
          let items = JSON.parse(localStorage.getItem('financialManagement'));
-         let date_income = {};
-         let date_cost = {};
-         for(let i=0;i<items.length;i++){
-             let total_cost = 0;
-             let total_income = 0;
-             for(let j=0;j<items.length;j++){
-                 if(items[i].date.year == items[j].date.year && items[i].date.month == items[j].date.month){
-                        if(items[j].type == 'درآمد'){
-                            total_income += Number(items[j].price);
-                        }else if(items[j].type == 'هزینه'){
-                            total_cost += Number(items[j].price);
-                        }
-                 }
-             }
-             date_income = Object.assign({},date_income,{
-                 [items[i].date.year+'/'+items[i].date.month] : total_income
-             })
-             date_cost = Object.assign({},date_cost,{
-                 [items[i].date.year+'/'+items[i].date.month] : total_cost
-             })
-         }
-
-         // console.log(month[items[i].date.month - 1]);
-         let key = Object.keys(date_cost);
-         for(let i=0;i<key.length;i++){
-
-             key[i] = key[i].replace("/12", " اسفند");
-             key[i] = key[i].replace("/11", " بهمن");
-             key[i] = key[i].replace("/10", " دی");
-             key[i] = key[i].replace("/9", " آذر");
-             key[i] = key[i].replace("/8", " آبان");
-             key[i] = key[i].replace("/7", " مهر");
-             key[i] = key[i].replace("/6", " شهریور");
-             key[i] = key[i].replace("/5", " مرداد");
-             key[i] = key[i].replace("/4", " تیر");
-             key[i] = key[i].replace("/3", " خرداد");
-             key[i] = key[i].replace("/2", " اردیبهشت");
-             key[i] = key[i].replace("/1", " فروردین");
-         }
-         let val_cost = Object.values(date_cost);
-         let val_income = Object.values(date_income);
-
-         const ctx = document.getElementById('myChart').getContext('2d');
-         const myChart = new Chart(ctx, {
-             type: 'line',
-             data: {
-                 labels: key,
-                 datasets: [{
-                     label: 'درآمد',
-                     data: val_income,
-                     backgroundColor: [
-                         '#2CBE26'
-                     ],
-                     borderColor: [
-                         '#2CBE26'
-                     ],
-                     borderWidth: 2
-                 },{
-                     label: 'هزینه',
-                     data: val_cost,
-                     backgroundColor: [
-                         '#E03F3F'
-                     ],
-                     borderColor: [
-                         '#E03F3F'
-                     ],
-                     borderWidth: 2
-                 }]
-             },
-             options: {
-                 scales: {
-                     y: {
-                         beginAtZero: true
+         if(items !== null){
+             let date_income = {};
+             let date_cost = {};
+             for(let i=0;i<items.length;i++){
+                 if(items[i].is_deleted == false){
+                     let total_cost = 0;
+                     let total_income = 0;
+                     for(let j=0;j<items.length;j++){
+                         if(items[i].date.year == items[j].date.year && items[i].date.month == items[j].date.month && items[j].is_deleted == false){
+                             if(items[j].type == 'درآمد'){
+                                 total_income += Number(items[j].price);
+                             }else if(items[j].type == 'هزینه'){
+                                 total_cost += Number(items[j].price);
+                             }
+                         }
                      }
+                     date_income = Object.assign({},date_income,{
+                         [items[i].date.year+'/'+items[i].date.month] : total_income
+                     })
+                     date_cost = Object.assign({},date_cost,{
+                         [items[i].date.year+'/'+items[i].date.month] : total_cost
+                     })
                  }
              }
-         });
+
+             let key = Object.keys(date_cost);
+             for(let i=0;i<key.length;i++){
+                 key[i] = key[i].replace("/12", " اسفند");
+                 key[i] = key[i].replace("/11", " بهمن");
+                 key[i] = key[i].replace("/10", " دی");
+                 key[i] = key[i].replace("/9", " آذر");
+                 key[i] = key[i].replace("/8", " آبان");
+                 key[i] = key[i].replace("/7", " مهر");
+                 key[i] = key[i].replace("/6", " شهریور");
+                 key[i] = key[i].replace("/5", " مرداد");
+                 key[i] = key[i].replace("/4", " تیر");
+                 key[i] = key[i].replace("/3", " خرداد");
+                 key[i] = key[i].replace("/2", " اردیبهشت");
+                 key[i] = key[i].replace("/1", " فروردین");
+             }
+             let val_cost = Object.values(date_cost);
+             let val_income = Object.values(date_income);
+             // remove chart
+             for(let i=0;i<myChart.data.labels.length;i++){
+                 myChart.data.labels.pop();
+                 myChart.data.datasets[0].data.pop();
+                 myChart.data.datasets[1].data.pop();
+             }
+             // add chart
+             for(let i=0;i<key.length;i++){
+                 myChart.data.labels.push(key[i]);
+                 myChart.data.datasets[0].data.push(val_income[i]);
+                 myChart.data.datasets[1].data.push(val_cost[i]);
+             }
+             myChart.update();
+         }
      }
      loadPage() {
          let income = 0;
          let cost = 0;
-         document.getElementById('table-body').remove();
+         if(document.getElementById('table-body')){
+             document.getElementById('table-body').remove();
+         }else{
+             document.getElementsByTagName('tbody')[0].remove();
+         }
          let items = JSON.parse(localStorage.getItem('financialManagement'));
          if(items !== null){
              let table_body = document.createElement('tbody');
@@ -163,6 +146,18 @@
              // for data entry in total box
              document.getElementById('total-cost').textContent = this.numberToPersian(this.separate(cost));
              document.getElementById('total-income').textContent = this.numberToPersian(this.separate(income));
+         }else if (items == null){
+             let tbody = document.createElement('tbody');
+             let tr = document.createElement('tr');
+             tr.setAttribute('className', 'odd');
+             let td = document.createElement('td');
+             td.setAttribute('valign', 'top');
+             td.setAttribute('colSpan', '5');
+             td.setAttribute('className', 'dataTables_empty');
+             td.textContent = 'داده ای جهت نمایش وجود ندارد';
+             tr.appendChild(td);
+             tbody.appendChild(tr);
+             document.getElementById('dataTable').appendChild(tbody);
          }
          this.loadChart();
      }
@@ -200,6 +195,12 @@
              ];
              localStorage.setItem('financialManagement',JSON.stringify(newItem));
          }
+         let form = document.getElementById('form');
+         form.price.value = '';
+         form.year.value = '';
+         form.month.value = '';
+         form.day.value = '';
+         form.desc.value = '';
          this.loadPage();
      }
      removeItem(id){
